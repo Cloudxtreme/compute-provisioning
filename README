@@ -1,0 +1,51 @@
+Compute Provisioning Benchmark
+
+Initiates compute instance provisioning requests and tracks the time required 
+to fulfill these requests. Once complete, newly provisioned compute instances 
+are destroyed.
+
+RUNTIME PARAMETERS
+The following runtime parameters are used by this benchmark:
+
+* api                       REQUIRED: corresponds with a folder in ./apis.
+                            Defines an implementation of a compute service 
+                            provisioning API. Additional API specific 
+                            runtime parameters are documented in READMEs in 
+                            these folders
+* api_endpoint              Optional API endpoint - may override the default 
+                            API endpoint
+* api_key                   REQUIRED: API key for the service being tested
+* api_secret                REQUIRED: API secret for the service being tested
+* debug                     [0|1] whether or not to enable debug statements in 
+                            the output logs (default 0)
+* os                        REQUIRED: Identifier of the OS image/template/AMI 
+                            to provision compute instances with
+* quantity                  the number of compute instances to request. 
+                            Default 1
+* region                    optional region identifier. reference service 
+                            READMEs for valid regions
+                            provisioning logic for a compute service
+* timeout                   Amount of time (secs) before designating a request 
+                            as timed out. Default is 1200
+* type                      REQUIRED: the type of instance to provision.  
+                            reference service READMEs for valid types
+* verify                    Provisioning completion verification method. One of
+                            the following:
+                              api    timing stops when API confirms 
+                                     provisioning completion (DEFAULT)
+                              ping   timing stops when compute instance can be 
+                                     pinged 
+                              port_n timing stops when compute instance can be 
+                                     connected to on port n (e.g; port_80)
+
+RESULT METRICS
+The following result metrics are produced by this benchmark (N is an 
+incrementing value from 1 to 'quantity'):
+
+* provision_cpuN          The CPU model for the provisioned instance (optional 
+                          depending on the API and parameters used)
+* provision_instance_idN  Service instance identifier
+* provision_ipN           Instance IP address or hostname
+* provision_request_idN   Service instance request identifier
+* provision_statusN       success, timeout or fail
+* provision_timeN         Time to provision in seconds (e.g. 30.9482)

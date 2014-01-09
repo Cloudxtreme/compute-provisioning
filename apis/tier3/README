@@ -1,0 +1,32 @@
+Implements the Tier 3 REST API v1.0 as documented here:
+
+https://t3n.zendesk.com/categories/20012068-API-v1-0
+
+Standard and custom provisioning parameters:
+
+* os                        This parameter must reference a server template 
+                            Name attribute as defined here:
+                            https://t3n.zendesk.com/entries/21004451-Get-Server-Templates
+                            
+* region                    This parameter may reference either the location 
+                            Alias or Region attributes as defined here:
+                            https://t3n.zendesk.com/entries/22422737-GetLocations
+                            
+* tier3_group               The ID or Name of the group to associate 
+                            provisioned servers to. If not specified, the 
+                            first account group or the group with 'default' in
+                            its name will be used
+                            
+* tier3_network             The name of the network to provision instances to. 
+                            If not specified, the first network in the region 
+                            specified will be used. Network names are defined
+                            using this API call:
+                            https://t3n.zendesk.com/entries/23098157-Get-Deployable-Networks
+                            
+* tier3_server_type         server type (1=standard; 2=enterprise) - default 1
+
+* tier3_service_level       service level (1=premium; 2=standard) - default 2
+                            
+* type                      should use the format "Xcpu-Ygb" where X is the 
+                            number of CPUs (Cpu parameter) and Y is the amount
+                            of memory in GB (MemoryGB parameter)
